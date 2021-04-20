@@ -12,8 +12,18 @@ namespace PasswordCracker
         public static bool found;
         public static string Promt()
         {
+            string input = "";
             Console.WriteLine("Please enter your string:");
-            string input = Console.ReadLine();
+            try
+            {
+                input = Console.ReadLine();
+            }
+            catch
+            {
+                Console.WriteLine($"An error occurred; please try again.");
+                return Promt();
+            }
+            
             return input;
         }
         public static void Start()
@@ -25,7 +35,9 @@ namespace PasswordCracker
 
             toCrack = Promt();
 
-            
+            // Declare 2 threads to implement multithreading.
+            // Gen 1 goes from ASCII 33 -> 126
+            // Gen 2 goes from ASCII 126 -> 33
             Thread gen1 = new Thread(() => GeneratePasswordForward(String.Empty));
             Thread gen2 = new Thread(() => GeneratePasswordBackward(String.Empty));
             gen1.Start();
