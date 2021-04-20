@@ -11,7 +11,7 @@ namespace PasswordCracker
         public static string toCrack;
         public static bool found;
         public static long attempts;
-        public static string Promt()
+        public  string Promt()
         {
             string input = "";
             Console.WriteLine("Please enter your string:");
@@ -27,7 +27,7 @@ namespace PasswordCracker
             
             return input;
         }
-        public static void Start()
+        public void Start()
         {
             found = false;
             attempts = 0;
@@ -75,7 +75,7 @@ namespace PasswordCracker
             Console.WriteLine($"Total passwords generated and tried: {attempts}");
         }
 
-        public static void GeneratePasswordForward(string input)
+        public void GeneratePasswordForward(string input)
         {
             attempts++;
             if (input == toCrack)
@@ -101,7 +101,7 @@ namespace PasswordCracker
             }
         }
 
-        public static void GeneratePasswordBackward(string input)
+        public void GeneratePasswordBackward(string input)
         {
             attempts++;
             if (input == toCrack)

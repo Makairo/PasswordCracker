@@ -6,7 +6,8 @@ namespace PasswordCracker
     {
         static void Main(string[] args)
         {
-            Cracker.Start();
+            Cracker PasswordCracker = new Cracker();
+            PasswordCracker.Start();
         }
     }
 }
