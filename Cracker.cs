@@ -10,6 +10,7 @@ namespace PasswordCracker
     {
         public static string toCrack;
         public static bool found;
+        public static long attempts;
         public static string Promt()
         {
             string input = "";
@@ -29,6 +30,7 @@ namespace PasswordCracker
         public static void Start()
         {
             found = false;
+            attempts = 0;
             // Declare stopwatch for timing, grab user input
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -56,11 +58,12 @@ namespace PasswordCracker
 
             Console.WriteLine($"Password {(found ? "cracked" : "not cracked")}.");
             Console.WriteLine("Total runime: " + totalTime);
+            Console.WriteLine($"Total passwords generated and tried: {attempts}");
         }
 
         public static void GeneratePasswordForward(string input)
         {
-
+            attempts++;
             if (input == toCrack)
             {
                 found = true;
@@ -70,8 +73,8 @@ namespace PasswordCracker
 
             char temp = ' ';
 
-            // Valid ASCII characters are dec 33 - dec 126
-            for (int i = 33; i <= 126; i++)
+            // Valid ASCII characters are dec 32 - dec 126
+            for (int i = 32; i <= 126; i++)
             {
                 // This function is recursively called, will bounce back if 
                 // the length goes over the search bounds.
@@ -86,7 +89,7 @@ namespace PasswordCracker
 
         public static void GeneratePasswordBackward(string input)
         {
-
+            attempts++;
             if (input == toCrack)
             {
                 found = true;
@@ -96,8 +99,8 @@ namespace PasswordCracker
 
             char temp = ' ';
 
-            // Valid ASCII characters are dec 33 - dec 126
-            for (int i = 126; i >= 33; i--)
+            // Valid ASCII characters are dec 32 - dec 126
+            for (int i = 126; i >= 32; i--)
             {
                 // This function is recursively called, will bounce back if 
                 // the length goes over the search bounds.
