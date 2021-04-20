@@ -38,11 +38,14 @@ namespace PasswordCracker
             // Declare 2 threads to implement multithreading.
             // Gen 1 goes from ASCII 33 -> 126
             // Gen 2 goes from ASCII 126 -> 33
+            Console.WriteLine("Cracking . . .");
             Thread gen1 = new Thread(() => GeneratePasswordForward(String.Empty));
             Thread gen2 = new Thread(() => GeneratePasswordBackward(String.Empty));
             gen1.Start();
             gen2.Start();
 
+            // Ensure threads are both completed before method continues.
+            gen1.Join();
 
             stopwatch.Stop();
             TimeSpan time = stopwatch.Elapsed;
@@ -61,6 +64,7 @@ namespace PasswordCracker
             if (input == toCrack)
             {
                 found = true;
+                
                 return;
             }
 
@@ -75,7 +79,7 @@ namespace PasswordCracker
 
                 // Casting int to char, as well as printing current iteration to console.
                 temp = (char)i;
-                Console.WriteLine(input + temp);
+                //Console.WriteLine(input + temp);
                 GeneratePasswordForward(input + temp);
             }
         }
@@ -86,6 +90,7 @@ namespace PasswordCracker
             if (input == toCrack)
             {
                 found = true;
+                
                 return;
             }
 
@@ -100,7 +105,7 @@ namespace PasswordCracker
 
                 // Casting int to char, as well as printing current iteration to console.
                 temp = (char)i;
-                Console.WriteLine(input + temp);
+                //Console.WriteLine(input + temp);
                 GeneratePasswordBackward(input + temp);
             }
         }
