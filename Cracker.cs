@@ -57,7 +57,7 @@ namespace PasswordCracker
             gen3.Start();
             gen4.Start();
 
-            // Ensure threads are both completed before method continues.
+            // Ensure threads are all completed before method continues.
             gen1.Join();
             gen2.Join();
             gen3.Join();
