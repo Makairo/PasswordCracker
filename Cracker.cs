@@ -31,16 +31,31 @@ namespace PasswordCracker
         {
             found = false;
             attempts = 0;
-            // Declare stopwatch for timing, grab user input
+            Console.WriteLine($"    PASSWORD CRACKER    ");
+            Console.WriteLine($"========================");
+
+
+
+            // Grab User Input
+            toCrack = Promt();
+
+
+            // Declare stopwatch for timing
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-
-            toCrack = Promt();
+            
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"========================");
+            Console.WriteLine($"");
+            Console.WriteLine("     Cracking . . .   ");
+            Console.WriteLine($"");
+            Console.WriteLine($"========================");
+            Console.WriteLine($"");
 
             // Declare 2 threads to implement multithreading.
             // Gen 1 goes from ASCII 33 -> 126
             // Gen 2 goes from ASCII 126 -> 33
-            Console.WriteLine("Cracking . . .");
             Thread gen1 = new Thread(() => GeneratePasswordForward(String.Empty));
             Thread gen2 = new Thread(() => GeneratePasswordBackward(String.Empty));
 
@@ -54,14 +69,14 @@ namespace PasswordCracker
 
             gen1.Start();
             gen2.Start();
-            gen3.Start();
-            gen4.Start();
+            //gen3.Start();
+            //gen4.Start();
 
             // Ensure threads are all completed before method continues.
             gen1.Join();
             gen2.Join();
-            gen3.Join();
-            gen4.Join();
+            //gen3.Join();
+            //gen4.Join();
 
             stopwatch.Stop();
             TimeSpan time = stopwatch.Elapsed;
@@ -69,8 +84,8 @@ namespace PasswordCracker
                 time.Hours, time.Minutes, time.Seconds, time.Milliseconds / 10
                 );
 
-
-            Console.WriteLine($"Password {(found ? "cracked" : "not cracked")}.");
+            Console.WriteLine($"===================================================");
+            Console.WriteLine($"Password was {(found ? "cracked" : "not cracked")}.");
             Console.WriteLine("Total runime: " + totalTime);
             Console.WriteLine($"Total passwords generated and tried: {attempts}");
         }
