@@ -62,21 +62,21 @@ namespace PasswordCracker
             // Two threads created with a starting character to reduce time for words starting with
             // P or C, could create more specific ones to narrow times further.
             // Want to avoid too many as each thread is resources used.
-            // Thread gen3 = new Thread(() => GeneratePasswordForward("P"));
-            // Thread gen4 = new Thread(() => GeneratePasswordForward("C"));
+            Thread gen3 = new Thread(() => GeneratePasswordForward("P"));
+            Thread gen4 = new Thread(() => GeneratePasswordForward("C"));
 
 
 
             gen1.Start();
             gen2.Start();
-            //gen3.Start();
-            //gen4.Start();
+            gen3.Start();
+            gen4.Start();
 
             // Ensure threads are all completed before method continues.
             gen1.Join();
             gen2.Join();
-            //gen3.Join();
-            //gen4.Join();
+            gen3.Join();
+            gen4.Join();
 
             stopwatch.Stop();
             TimeSpan time = stopwatch.Elapsed;
