@@ -31,8 +31,8 @@ namespace PasswordCracker
         {
             found = false;
             attempts = 0;
-            Console.WriteLine($"    PASSWORD CRACKER    ");
-            Console.WriteLine($"========================");
+            Console.WriteLine($"     PASSWORD CRACKER    ");
+            Console.WriteLine($"==========================");
 
 
 
